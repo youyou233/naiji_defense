@@ -45,11 +45,8 @@ let PlayerData = {
 	loadData(key) {
 		key = key || 'playerData'
 		let initPlayerData = {
-			level: 1,
-			money: 0,
-			atk: 1,
-			blood: 10,
-			character: 0, //当前选择的人 0为默认
+			level: 1,//关卡
+			money: 0,//金币
 			characters: [], //对应的是否拥有角色
 		}
 		if (isWeChat) {

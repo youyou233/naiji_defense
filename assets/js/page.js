@@ -8,6 +8,8 @@ cc.Class({
 	},
 	currentPage: 0,
 	loadChild() {
+		// TODO: 手动加载页面节点
+		let canvas=cc.director.getScene().getChildByName('Canvas')
 		return new Promise((resolve, rejects) => {
 
 			resolve()
@@ -20,7 +22,7 @@ cc.Class({
 	 * @param {*} target 传Node则直接操作Node 传数字则去dialogs中取对应的
 	 * @param {*} operation 操作方式 1打开 0关闭
 	 * @param dir 卷轴方向 0横板 1竖版
-	 * @param mask 是否有背景遮罩 TODO:
+	 * @param mask 是否有背景遮罩 
 	 */
 	operateDialog(target, operation, dir, mask) {
 		let action = ''
@@ -66,10 +68,25 @@ cc.Class({
 		this.operateDialog(+d, 0)
 	},
 	//------------------- 页面切换 ----------------
-	showPage(num) {
-		if (num == this.currentPage) {
+	/**
+	 * 切换页面 
+	 * @param currentPage
+	 * @param {*} target 
+	 */
+	showPage(target) {
+		if (typeof (target) == 'number') {
+			target = this.pages[target]
+		}
+		if (target == this.currentPage) {
 			return
 		}
+		target.x = window.winSize.width
+		target.active=true
+		let action = cc.moveBy(1, -window.winSize.width, 0).easing(cc.easeBackOut(2.0))
+		this.currentPage.runAction(cc.sequence(action, cc.callFunc(() => {
+			this.currentPage.active = false
+		})))
+		target.runAction(action)
 	},
 	// update (dt) {},
 });
