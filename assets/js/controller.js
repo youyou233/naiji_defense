@@ -7,6 +7,7 @@ cc.Class({
 		pageMgr: require('page')
 	},
 	start() {
+
 		utils.setDesignResolution()
 		this.loadData()
 		this.pageMgr.loadChild().then(() => {

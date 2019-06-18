@@ -14,7 +14,8 @@ var Utils = {
 		} else {
 			canvas.fitWidth = true;
 			canvas.fitHeight = false;
-		}
+    }
+    cc.view.enableAntiAlias(false)
 	},
 	isWeChat: (cc.sys.platform == cc.sys.WECHAT_GAME),
 	/**
