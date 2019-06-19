@@ -10,15 +10,15 @@ cc.Class({
 	},
 	start() {
 		utils.setDesignResolution()
-		this.loadData()
 		this.pageMgr.loadChild().then(() => {
-			this.pageMgr.showPage(0)
+      this.pageMgr.showPage(0)
+      this.loadData()
 		})
 	},
 	loadData() {
 		this.playerData = _playerData.loadData()
 		this.UI.init(this)
-		this.UI.updateAllUI()
+		this.UI.updatePageUI(1)//更新菜单页面的UI
 	},
 	gameStart() {
 		this.game.init(this)

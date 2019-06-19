@@ -99,6 +99,7 @@ cc.Class({
     target.runAction(cc.sequence(action,cc.callFunc(()=>{
       this.currentPage = target
     })))
+    this.aniUI(target)
   },
   showPageBtn(e, d) {
     this.showPage(+d)
@@ -107,6 +108,15 @@ cc.Class({
     for (let i in this.pages) {
       this.pages[i].active = false
     }
+  },
+  // ------------- UI ---------------
+  aniUI(target){
+    // let UINode=target.getChildByName('UI')
+    // if(UINode.getChildByName('top')){
+    //   let top=UINode.getChildByName('top')
+    //   top.active=false
+    //   top.y=window.winSize.height
+    // }
   },
   // update (dt) {},
 });
