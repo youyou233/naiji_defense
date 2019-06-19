@@ -3,25 +3,13 @@ cc.Class({
 
 	properties: {},
 
-	// LIFE-CYCLE CALLBACKS:
-
-	// onLoad () {},
+	// 一轮游戏的初始化
 	init(c) {
 		this._controller = c
 		this.loadChild()
 	},
 	loadChild() {
-		
-	},
-	start() {
 
 	},
-	onGameStart() {
-
-	},
-	updateMoney() {},
-	updateAllUI() {
-		this.updateMoney()
-	}
 	// update (dt) {},
 });

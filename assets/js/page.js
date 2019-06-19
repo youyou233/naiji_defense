@@ -7,7 +7,7 @@ cc.Class({
   },
   currentPage: 0,
   loadChild() {
-    // TODO: 手动加载页面节点
+    // 加载页面节点
     let canvas = cc.director.getScene().getChildByName('Canvas')
     return new Promise((resolve, rejects) => {
       let childArr = canvas.children
@@ -17,7 +17,6 @@ cc.Class({
         }
       }
       this.closeAllPage()
-      //console.log(this.pages)
       resolve()
     })
   },
@@ -74,7 +73,7 @@ cc.Class({
   },
   //------------------- 页面切换 ----------------
   /**
-   * 切换页面 
+   * 切换页面 兼容第一次打开页面
    * @param currentPage
    * @param {*} target 
    */

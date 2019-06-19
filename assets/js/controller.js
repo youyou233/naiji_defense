@@ -1,13 +1,14 @@
 var utils = require('utils')
-var playerData = require('playerData')
+var _playerData = require('playerData')
 cc.Class({
 	extends: cc.Component,
 
 	properties: {
-		pageMgr: require('page')
+		pageMgr: require('page'),
+		game: require('game'),
+		UI: require('UI'), //动态生成UI
 	},
 	start() {
-
 		utils.setDesignResolution()
 		this.loadData()
 		this.pageMgr.loadChild().then(() => {
@@ -15,7 +16,12 @@ cc.Class({
 		})
 	},
 	loadData() {
-		playerData.loadData()
-	}
-
+		this.playerData = _playerData.loadData()
+		this.UI.init(this)
+		this.UI.updateAllUI()
+	},
+	gameStart() {
+		this.game.init(this)
+		this.pageMgr.showPage(4)
+	},
 });
