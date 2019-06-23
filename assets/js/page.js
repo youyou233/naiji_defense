@@ -42,7 +42,7 @@ cc.Class({
     if (typeof (target) == 'number') {
       target = this.dialogs[target]
     }
-   // let content = target.getChildByName('content')
+    // let content = target.getChildByName('content')
     let action = ''
     // 判断操作
     if (operation) {
@@ -61,10 +61,10 @@ cc.Class({
     } else {
       // 判断方向
       if (dir) {
-        action = cc.moveTo(1, -window.winSize.height / 2 - target.height / 2, 0)
+        action = cc.moveTo(1, 0, -window.winSize.height / 2 - target.height / 2)
         // 关闭竖版弹框
       } else {
-        action = cc.moveTo(1, 0, window.winSize.width / 2 + target.width / 2)
+        action = cc.moveTo(1, window.winSize.width / 2 + target.width / 2, 0)
         // 关闭横板弹框
       }
       target.runAction(cc.sequence(action, cc.callFunc(() => {
@@ -77,7 +77,12 @@ cc.Class({
     this.operateDialog(+d, 1)
   },
   closeDialogBtn(e, d) {
-    this.operateDialog(+d, 0)
+    let dir = 0
+    switch (+d) {
+      case 0:
+        dir = 0;
+    }
+    this.operateDialog(+d, 0, dir)
   },
   //------------------- 页面切换 ----------------
   /**
@@ -122,7 +127,7 @@ cc.Class({
       this.pages[i].active = false
     }
   },
-  closeAllDialog(){
+  closeAllDialog() {
     for (let i in this.dialogs) {
       this.dialogs[i].active = false
     }
