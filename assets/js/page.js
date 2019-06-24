@@ -4,6 +4,7 @@ cc.Class({
   properties: {
     dialogs: [],
     pages: [],
+    isCanShow:true,
   },
   currentPage: 0,
   backUpPage: 0,
@@ -92,6 +93,10 @@ cc.Class({
    */
   showPage(target, back) {
     back = back || false
+    if (!this.isCanShow) {
+      return
+    }
+    this.isCanShow = false
     if (typeof (target) == 'number') {
       target = this.pages[target]
     }
@@ -105,19 +110,24 @@ cc.Class({
     }
     target.x = back ? -window.winSize.width : window.winSize.width
     target.active = true
-    let action = cc.moveBy(1, back ? window.winSize.width : -window.winSize.width, 0).easing(cc.easeBackOut(2.0))
-    let action2 = cc.moveBy(1, back ? window.winSize.width : -window.winSize.width, 0).easing(cc.easeBackOut(2.0))
+    let action = cc.moveTo(1, 0, 0).easing(cc.easeBackOut(2.0))
+    let action2 = cc.moveTo(1, back ? window.winSize.width : -window.winSize.width, 0).easing(cc.easeBackOut(2.0))
+    this.currentPage.stopAllActions()
     this.currentPage.runAction(cc.sequence(action2, cc.callFunc(() => {
       this.currentPage.active = false
     })))
+    target.stopAllActions()
     target.runAction(cc.sequence(action, cc.callFunc(() => {
+      this.closeAllDialog(target.name)
       this.currentPage = target
+      this.isCanShow = true
+
     })))
     this.aniUI(target)
   },
   // 切换上一个页面
   backUp(e, d) {
-
+    this.showPage(+d, 1)
   },
   showPageBtn(e, d) {
     this.showPage(+d)
@@ -127,8 +137,11 @@ cc.Class({
       this.pages[i].active = false
     }
   },
-  closeAllDialog() {
+  closeAllDialog(name) {
     for (let i in this.dialogs) {
+      if (this.dialogs[i].name == name) {
+        continue
+      }
       this.dialogs[i].active = false
     }
   },
