@@ -1,0 +1,8 @@
+{
+	"level":1,
+	"enemyArr":[10,12,15],
+	"boss":[0,0,0],
+	"enemyDif":1,
+	"enemyType":[1],
+	"weather":0
+}
