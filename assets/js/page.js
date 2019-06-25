@@ -103,7 +103,10 @@ cc.Class({
     if (!this.currentPage) {
       this.currentPage = target
       this.currentPage.active = true
+      this.isCanShow = true
+
       return
+
     }
     if (target == this.currentPage) {
       return

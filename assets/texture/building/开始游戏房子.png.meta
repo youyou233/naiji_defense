@@ -1,0 +1,31 @@
+{
+  "ver": "2.2.0",
+  "uuid": "818f2ef5-8740-4316-a813-511ac9ddf34c",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "subMetas": {
+    "开始游戏房子": {
+      "ver": "1.0.3",
+      "uuid": "9cbd0c3f-2535-4d67-91f0-77fb5826b88d",
+      "rawTextureUuid": "818f2ef5-8740-4316-a813-511ac9ddf34c",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 55,
+      "height": 44,
+      "rawWidth": 55,
+      "rawHeight": 44,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}
