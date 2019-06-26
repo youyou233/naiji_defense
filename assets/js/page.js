@@ -43,6 +43,7 @@ cc.Class({
     if (typeof (target) == 'number') {
       target = this.dialogs[target]
     }
+    target.stopAllActions()
     // let content = target.getChildByName('content')
     let action = ''
     // 判断操作
@@ -59,6 +60,7 @@ cc.Class({
       }
       action = cc.moveTo(0.5, 0, 0)
       target.runAction(action)
+
     } else {
       // 判断方向
       if (dir) {
@@ -104,9 +106,7 @@ cc.Class({
       this.currentPage = target
       this.currentPage.active = true
       this.isCanShow = true
-
       return
-
     }
     if (target == this.currentPage) {
       return
@@ -124,7 +124,6 @@ cc.Class({
       this.closeAllDialog(target.name)
       this.currentPage = target
       this.isCanShow = true
-
     })))
     this.aniUI(target)
   },

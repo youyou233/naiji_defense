@@ -4,6 +4,8 @@ cc.Class({
   properties: {
     buildingPrefab: cc.Prefab,
     buildingSF: [cc.SpriteFrame],
+    ninjaPrefab: cc.Prefab,
+    enemyPrefab: cc.Prefab
   },
 
   // 一轮游戏的初始化
@@ -14,10 +16,37 @@ cc.Class({
     this._controller = c
     this.UI = c.UI
     this.pageMgr = c.pageMgr
-    this.addBuilding()
+    this.status = 1 //游戏状态
+    this.beforeStart()
   },
   loadChild() {
-    this.buildingLand = this.node.getChildByName('scrollView').getChildByName('content').getChildByName('land')
+    let content = this.node.getChildByName('scrollView').getChildByName('content')
+    this.buildingLand = content.getChildByName('land')
+    this.ninjaGroup = content.getChildByName('ninjaGroup')
+    this.enemyGroup = content.getChildByName('enemyGroup')
+    let UI = this.node.getChildByName('UI')
+    this.coolDown = UI.getChildByName('coolDown').getChildByName('label')
+    this.coolDown.active = false
+  },
+  clearAllGroup() {
+
+  },
+  beforeStart() {
+    this.addBuilding()
+    this.clearAllGroup()
+    // 计时六十秒 然后生成忍者
+    this.coolDownNun = 11
+    this.coolDownInterval = setInterval(() => {
+      this.coolDownNun--
+      if (this.coolDownNun < 0) {
+        clearInterval(this.coolDownInterval)
+        this.startEnemyInterval()
+        this.coolDown.active = false
+      } else {
+        this.coolDown.active = true
+        this.coolDown.getComponent(cc.Label).string = this.coolDownNun
+      }
+    }, 1000)
   },
   clickBuildingBtn(current) {
     this.currentBuilding = current
@@ -46,6 +75,16 @@ cc.Class({
         this.buildingArr.push(arr[item].getComponent('building'))
       }
     })
+  },
+  //------------ 敌人 -----------------
+  startEnemyInterval() {
+    this.enemyGenerateInterval = setInterval(() => {
+      let enemy = cc.instantiate(this.enemyPrefab)
+      enemy.parent = this.enemyGroup
+      enemy.x = 0
+      enemy.y = 0
+      enemy.getComponent('enemy').init(this)
+    }, 3000)
   }
   // update (dt) {},
 });
