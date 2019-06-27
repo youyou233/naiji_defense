@@ -20,5 +20,6 @@ cc.Class({
     this.jumpInterval = setInterval(() => {
       this.node.runAction(action)
     }, 800)
-  },
+	},
+	onCollisionEnter: function (other) {}
 });
