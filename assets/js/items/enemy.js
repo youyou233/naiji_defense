@@ -20,6 +20,11 @@ cc.Class({
     this.jumpInterval = setInterval(() => {
       this.node.runAction(action)
     }, 800)
-	},
-	onCollisionEnter: function (other) {}
+  },
+  onCollisionEnter: function (other) {},
+  update() {
+    if (this.node.x < -100) {
+      this._game.gameOver()
+    }
+  }
 });
